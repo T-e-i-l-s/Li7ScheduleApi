@@ -11,6 +11,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 public class PingController {
+
     /*
      GET запрос к /api/pong
      Response всегда - { "answer": "pong" }

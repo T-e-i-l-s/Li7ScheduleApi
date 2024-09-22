@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 public class ScheduleApi {
     public static void main(String[] args) {
-
-        System.out.println("start!!!!!!");
         SpringApplication.run(ScheduleApi.class, args);
     }
 }

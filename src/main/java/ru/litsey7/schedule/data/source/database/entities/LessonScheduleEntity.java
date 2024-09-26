@@ -1,13 +1,15 @@
 package ru.litsey7.schedule.data.source.database.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.json.JSONArray;
 
+import java.io.IOException;
 import java.sql.Date;
-import java.util.List;
+import java.util.Map;
 
 // Модель одной строки в таблице с расписанием дня
 @Entity
@@ -17,11 +19,15 @@ public class LessonScheduleEntity {
     public Date date;
     public String lessons;
 
+    // Getter to convert the JSON string to a Map<String, Object>
     @JsonProperty("lessons")
-    public List<Object> getLessonsAsJson() {
-        // Преобразуем строку в JSONArray
-        JSONArray jsonArray = new JSONArray(lessons);
-        // Возвращаем как List
-        return jsonArray.toList();
+    public Map<String, Object> getLessonsAsJson() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(lessons, new TypeReference<>() {});
+        } catch (IOException e) {
+            return null;
+        }
     }
+
 }

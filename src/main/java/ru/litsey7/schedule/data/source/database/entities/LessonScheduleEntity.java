@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.Map;
+import java.util.List;
 
 // Модель одной строки в таблице с расписанием дня
 @Entity
@@ -19,15 +19,26 @@ public class LessonScheduleEntity {
     public Date date;
     public String lessons;
 
-    // Getter to convert the JSON string to a Map<String, Object>
+    // Перевод списка уроков из json строки в структуру для ответа
     @JsonProperty("lessons")
-    public Map<String, Object> getLessonsAsJson() {
+    public List<LessonSchedule> getLessonsAsJson() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
+            // Преобразование строки "lessons" в список объектов LessonSchedule
             return objectMapper.readValue(lessons, new TypeReference<>() {});
         } catch (IOException e) {
             return null;
         }
     }
 
+    // Вложенные классы для структурирования данных внутри столбца "lessons"
+    public static class LessonSchedule {
+        @JsonProperty("class")
+        public String className;
+        public List<Lesson> lessons;
+    }
+    public static class Lesson {
+        public String name;
+        public String classroom;
+    }
 }

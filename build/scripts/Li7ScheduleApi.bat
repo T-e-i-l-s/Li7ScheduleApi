@@ -72,7 +72,7 @@ set CLASSPATH=%APP_HOME%\lib\Li7ScheduleApi-1.0-SNAPSHOT-plain.jar;%APP_HOME%\li
 
 
 @rem Execute Li7ScheduleApi
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %LI7_SCHEDULE_API_OPTS%  -classpath "%CLASSPATH%" ru.litsey7.schedule.ScheduleApi %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %LI7_SCHEDULE_API_OPTS%  -classpath "%CLASSPATH%" ru.litsey7.schedule.Application %*
 
 :end
 @rem End local scope for the variables with windows NT shell

@@ -25,4 +25,4 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-mainClassName = 'ru.litsey7.schedule.ScheduleApi' // Замените на ваш главный класс
+mainClassName = 'ru.litsey7.schedule.Application'

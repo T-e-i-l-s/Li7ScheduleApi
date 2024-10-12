@@ -209,7 +209,7 @@ DEFAULT_JVM_OPTS=""
 
 set -- \
         -classpath "$CLASSPATH" \
-        ru.litsey7.schedule.ScheduleApi \
+        ru.litsey7.schedule.Application \
         "$@"
 
 # Stop when "xargs" is not available.

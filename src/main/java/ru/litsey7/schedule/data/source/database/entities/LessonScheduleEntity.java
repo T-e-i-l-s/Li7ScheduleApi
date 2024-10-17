@@ -8,26 +8,37 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 
-// Модель одной строки в таблице с расписанием дня
 @Entity
 @Table(name = "lesson_schedule")
 public class LessonScheduleEntity {
     @Id
-    public Date date;
+    public Byte weekday;
+    @JsonProperty("lessons")
     public String lessons;
 
-    // Перевод списка уроков из json строки в структуру для ответа
+    // Перевод списка уроков из JSON строки в структуру для ответа
     @JsonProperty("lessons")
     public List<LessonSchedule> getLessonsAsJson() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             // Преобразование строки "lessons" в список объектов LessonSchedule
-            return objectMapper.readValue(lessons, new TypeReference<>() {});
+            return objectMapper.readValue(lessons, new TypeReference<List<LessonSchedule>>() {});
         } catch (IOException e) {
             return null;
+        }
+    }
+
+    // Сеттер для установки строки JSON
+    @JsonProperty("lessons")
+    public void setLessonsAsJson(List<LessonSchedule> lessonsAsJson) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            // Преобразование объекта в строку JSON
+            this.lessons = objectMapper.writeValueAsString(lessonsAsJson);
+        } catch (IOException e) {
+            this.lessons = null;
         }
     }
 
@@ -37,6 +48,7 @@ public class LessonScheduleEntity {
         public String className;
         public List<Lesson> lessons;
     }
+
     public static class Lesson {
         public String name;
         public String classroom;

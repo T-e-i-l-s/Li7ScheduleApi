@@ -10,5 +10,5 @@ import java.util.List;
 // Класс для работы с таблицой режима дня в бд.
 @Repository
 public interface LessonScheduleRepository extends JpaRepository<LessonScheduleEntity, String> {
-    List<LessonScheduleEntity> findByDate(LocalDate date);
+    List<LessonScheduleEntity> findByWeekday(Byte weekday);
 }

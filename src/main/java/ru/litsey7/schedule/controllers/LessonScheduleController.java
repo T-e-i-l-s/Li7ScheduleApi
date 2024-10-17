@@ -34,10 +34,9 @@ public class LessonScheduleController {
     // GET запрос к /api/lesson_schedule
     @GetMapping("/lesson_schedule")
     public LessonScheduleEntity getScheduleByDate(
-        @RequestParam("date")
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date
+        @RequestParam("weekday") Byte weekday
     ) {
-        List<LessonScheduleEntity> lessons = lessonScheduleRepository.findByDate(date);
+        List<LessonScheduleEntity> lessons = lessonScheduleRepository.findByWeekday(weekday);
         return lessons.stream()
                 .peek(LessonScheduleEntity::getLessonsAsJson)
                 .toList()

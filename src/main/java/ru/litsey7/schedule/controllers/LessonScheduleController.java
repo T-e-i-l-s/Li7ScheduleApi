@@ -21,7 +21,7 @@ public class LessonScheduleController {
     @Autowired
     LessonScheduleRepository lessonScheduleRepository;
 
-    // GET запрос к /api/lesson_schedule
+    // GET запрос к /api/full_lesson_schedule
     @GetMapping("/full_lesson_schedule")
     public List<LessonScheduleEntity> getSchedule() {
         List<LessonScheduleEntity> lessons = lessonScheduleRepository.findAll();
@@ -34,7 +34,7 @@ public class LessonScheduleController {
     // GET запрос к /api/lesson_schedule
     @GetMapping("/lesson_schedule")
     public LessonScheduleEntity getScheduleByDate(
-        @RequestParam("weekday") Byte weekday
+            @RequestParam("weekday") Byte weekday
     ) {
         List<LessonScheduleEntity> lessons = lessonScheduleRepository.findByWeekday(weekday);
         return lessons.stream()
@@ -43,9 +43,11 @@ public class LessonScheduleController {
                 .get(0);
     }
 
-    // Post запрос к /api/full_lesson_schedule
+    // POST запрос к /api/full_lesson_schedule
     @PostMapping("/full_lesson_schedule")
     public ResponseEntity<String> setSchedule(@RequestBody List<LessonScheduleEntity> schedule) {
+        lessonScheduleRepository.deleteAll();
+        lessonScheduleRepository.saveAll(schedule);
         return ResponseEntity.ok("Processed");
     }
 }

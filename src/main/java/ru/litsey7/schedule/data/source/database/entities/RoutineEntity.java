@@ -1,6 +1,7 @@
 package ru.litsey7.schedule.data.source.database.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -12,6 +13,6 @@ import java.sql.Time;
 public class RoutineEntity {
     @Id
     public String name;
-    public Time start_time;
-    public Time end_time;
+    public String start_time;
+    public String end_time;
 }

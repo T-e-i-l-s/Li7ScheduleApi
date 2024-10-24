@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "lesson_schedule")
 public class LessonScheduleEntity {
     @Id
-    public Byte weekday;
+    public Integer weekday;
     @JsonProperty("lessons")
     public String lessons;
 
